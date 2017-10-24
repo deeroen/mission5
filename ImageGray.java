@@ -31,8 +31,22 @@ public class ImageGray
     
     public static int[][] subtract(int[][] img1, int[][] img2, int threshold)
     {
-        // A COMPLETER
-        return null;
+        assert img1 != null && threshold>=0 && 
+        img1.length==img2.length && img1[0].length==img2[0].length : "Bad precondition";
+        int[][] result = new int [img1.length][img1[0].length];
+        for (int i = 0; i< img1.length ; i++){
+            
+            for (int j = 0; j< img1[i].length ; j++) {
+                int r =  Math.abs(img1[i][j] - img2[i][j]);
+                if (r <= threshold){
+                    r = 255;
+                } else {
+                    r = img1[i][j];
+                }
+                result [i][j] = r;
+            }
+        }
+        return result;
     }
 
     /**
@@ -81,8 +95,28 @@ public class ImageGray
      */
     public static boolean contains(int[][] img1, int[][] img2, int threshold)
     {
-        // A COMPLETER
+        for(int i = 0; i<img1.length - img2.length; i++){
+            for(int j = 0; j < img1[i].length - img2[0].length; j++){
+                if(isSimilar(img1,img2,threshold,i,j))
+                    return true;
+            }
+        }
         return false;        
+    }
+    
+    /**
+     * @pre: i < img1.length - img2.length && j < img1[i].length - img2[0].length
+     * @post:
+     * 
+     */
+    public static boolean isSimilar(int[][] img1, int[][] img2, int threshold, int i, int j){
+        for(int k = 0; k < img2.length; k++){
+            for(int l = 0; l < img2[k].length; l ++ ){
+                if(Math.abs(img1[i+k][j+l] - img2[k][l]) > threshold)
+                    return false;
+            }
+        }
+        return true;
     }
     
     /**
@@ -118,8 +152,18 @@ public class ImageGray
     
     public static int[][] rescale(int[][] img, int newHeight, int newWidth)
     {
-        // A COMPLETER
-        return null;
+        float ratioH = (float)newHeight / (float) img[0].length;
+        float ratioW = (float)newWidth / (float) img.length;
+        int [][] result = new int [newWidth][newHeight];
+        for(int i = 0; i < result.length; i++){
+            for(int j = 0; j < result[i].length; j++){
+                int indI = Math.min((int)Math.round((float)i / ratioW), img.length - 1);
+                int indJ = Math.min((int)Math.round((float)j / ratioH), img[0].length - 1);
+                
+                result[i][j] = (int) img[indI][indJ];
+            }
+        }
+        return result;
     }   
     
 }
