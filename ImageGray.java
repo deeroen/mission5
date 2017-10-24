@@ -7,14 +7,14 @@
  */
 public class ImageGray
 {
-    
+
     public static void main(String[] args) {
-        
+
         LibrairieImage.show (LibrairieImage.createCross (890));
         System.out.println ("La premiere fenetre presente une photo celebre d'Albert Einstein");
         LibrairieImage.show (LibrairieImage.imageGrayFromFile ("einstein.jpg"));
     }
-    
+
     /**
      * @pre img!=null && threshold>=0 && img1.length==img2.length
      *      && img1[0].length==img2[0].length
@@ -28,14 +28,15 @@ public class ImageGray
      *         du pixel (i,j) de l'image img1
      *       Les images img1 et img2 n'ont pas ete modifiees
      */
-    
+
     public static int[][] subtract(int[][] img1, int[][] img2, int threshold)
     {
+
         assert img1 != null && threshold>=0 && 
         img1.length==img2.length && img1[0].length==img2[0].length : "Bad precondition";
         int[][] result = new int [img1.length][img1[0].length];
         for (int i = 0; i< img1.length ; i++){
-            
+
             for (int j = 0; j< img1[i].length ; j++) {
                 int r =  Math.abs(img1[i][j] - img2[i][j]);
                 if (r <= threshold){
@@ -49,33 +50,31 @@ public class ImageGray
         return result;
     }
 
-   /**
+    /**
      * @pre -
      * @post retourne l'image img eclaircie en calculant la luminance
      *       de chaque pixel de l'image eclaire comme valant 255*sqrt(lum/255)
      *       ou lum est la luminance du pixel courant
      *       L'image img n'a pas ete modifiee par l'execution de cette methode
      */
-    
+
     public static int[][] brighten(int[][] args)
     {       
-            if(args==null){return null; System.out.println("du pate sur brighten");}
-            else{
+        if(args==null){return null; System.out.println("du pate sur brighten");}
+        else{
             int[][] tab= new int [args.length][args[0].length];
             for (int i=0;i<args.length;i++){
                 for (int z=0;z<args[0].length;z++){
-                    tab [i][z]= 255*Math.sqrt(args[i][z]/255);
+                    tab [i][z]= 255* Math.sqrt(args[i][z]/255);
+
                 }
-            
+
             }
-            
-            
+
             return tab;
         }
     }
-   
 
-    
     /**
      * @pre img1!=null, img2!=null threshold>=0
      * @post retourne vrai si l'image img2 est une sous-image de l'image img1
@@ -114,7 +113,7 @@ public class ImageGray
         }
         return false;        
     }
-    
+
     /**
      * @pre: i < img1.length - img2.length && j < img1[i].length - img2[0].length
      * @post:
@@ -129,7 +128,7 @@ public class ImageGray
         }
         return true;
     }
-    
+
     /**
      * @pre newWidth>0 newHeight>0
      * @post retourne une nouvelle image de dimension newWidth * newHeigth
@@ -160,7 +159,7 @@ public class ImageGray
      *       L'image img n'a pas ete modifiee par l'execution de cette methode
      *       
      */
-    
+
     public static int[][] rescale(int[][] img, int newHeight, int newWidth)
     {
         float ratioH = (float)newHeight / (float) img[0].length;
@@ -170,11 +169,10 @@ public class ImageGray
             for(int j = 0; j < result[i].length; j++){
                 int indI = Math.min((int)Math.round((float)i / ratioW), img.length - 1);
                 int indJ = Math.min((int)Math.round((float)j / ratioH), img[0].length - 1);
-                
+
                 result[i][j] = (int) img[indI][indJ];
             }
         }
         return result;
     }
-
 }
