@@ -60,12 +60,12 @@ public class ImageGray
 
     public static int[][] brighten(int[][] args)
     {       
-        if(args==null){return null; System.out.println("du pate sur brighten");}
+        if(args==null){ System.out.println("du pate sur brighten");return null;}
         else{
             int[][] tab= new int [args.length][args[0].length];
             for (int i=0;i<args.length;i++){
                 for (int z=0;z<args[0].length;z++){
-                    tab [i][z]= 255* Math.sqrt(args[i][z]/255);
+                    tab [i][z]= 255*(int)Math.sqrt(args[i][z]/255);
 
                 }
 
@@ -104,7 +104,8 @@ public class ImageGray
      *       par l'execution de cette methode
      */
     public static boolean contains(int[][] img1, int[][] img2, int threshold)
-    {
+    {   
+        assert img1!=null&& img2!=null&& threshold>=0;
         for(int i = 0; i<img1.length - img2.length; i++){
             for(int j = 0; j < img1[i].length - img2[0].length; j++){
                 if(isSimilar(img1,img2,threshold,i,j))
@@ -116,10 +117,11 @@ public class ImageGray
 
     /**
      * @pre: i < img1.length - img2.length && j < img1[i].length - img2[0].length
-     * @post:
+     * @post: 
      * 
      */
     public static boolean isSimilar(int[][] img1, int[][] img2, int threshold, int i, int j){
+        assert i < img1.length - img2.length && j < img1[i].length - img2[0].length;
         for(int k = 0; k < img2.length; k++){
             for(int l = 0; l < img2[k].length; l ++ ){
                 if(Math.abs(img1[i+k][j+l] - img2[k][l]) > threshold)
@@ -162,6 +164,7 @@ public class ImageGray
 
     public static int[][] rescale(int[][] img, int newHeight, int newWidth)
     {
+        assert newWidth>0&& newHeight>0;
         float ratioH = (float)newHeight / (float) img[0].length;
         float ratioW = (float)newWidth / (float) img.length;
         int [][] result = new int [newWidth][newHeight];
