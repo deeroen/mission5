@@ -60,12 +60,15 @@ public class ImageGray
 
     public static int[][] brighten(int[][] args)
     {       
-        if(args==null){return null; System.out.println("du pate sur brighten");}
+        if(args==null){
+            System.out.println("du pate sur brighten");
+            return null; 
+        }
         else{
             int[][] tab= new int [args.length][args[0].length];
             for (int i=0;i<args.length;i++){
                 for (int z=0;z<args[0].length;z++){
-                    tab [i][z]= 255* Math.sqrt(args[i][z]/255);
+                    tab [i][z]= 255* (int) Math.sqrt(args[i][z]/255);
 
                 }
 
