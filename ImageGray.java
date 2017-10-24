@@ -31,6 +31,7 @@ public class ImageGray
     
     public static int[][] subtract(int[][] img1, int[][] img2, int threshold)
     {
+
         assert img1 != null && threshold>=0 && 
         img1.length==img2.length && img1[0].length==img2[0].length : "Bad precondition";
         int[][] result = new int [img1.length][img1[0].length];
@@ -164,6 +165,6 @@ public class ImageGray
             }
         }
         return result;
-    }   
+    }
     
 }
