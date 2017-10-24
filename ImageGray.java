@@ -31,7 +31,6 @@ public class ImageGray
     
     public static int[][] subtract(int[][] img1, int[][] img2, int threshold)
     {
-        // A COMPLETER
         return null;
     }
 
