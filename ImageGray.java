@@ -31,7 +31,6 @@ public class ImageGray
     
     public static int[][] subtract(int[][] img1, int[][] img2, int threshold)
     {
-
         assert img1 != null && threshold>=0 && 
         img1.length==img2.length && img1[0].length==img2[0].length : "Bad precondition";
         int[][] result = new int [img1.length][img1[0].length];
@@ -50,7 +49,7 @@ public class ImageGray
         return result;
     }
 
-    /**
+   /**
      * @pre -
      * @post retourne l'image img eclaircie en calculant la luminance
      *       de chaque pixel de l'image eclaire comme valant 255*sqrt(lum/255)
@@ -58,12 +57,23 @@ public class ImageGray
      *       L'image img n'a pas ete modifiee par l'execution de cette methode
      */
     
-    public static int[][] brighten(int[][] img)
-    {
-        // A COMPLETER
-        return null;
+    public static int[][] brighten(int[][] args)
+    {       
+            if(args==null){return null; System.out.println("du pate sur brighten");}
+            else{
+            int[][] tab= new int [args.length][args[0].length];
+            for (int i=0;i<args.length;i++){
+                for (int z=0;z<args[0].length;z++){
+                    tab [i][z]= 255*Math.sqrt(args[i][z]/255);
+                }
+            
+            }
+            
+            
+            return tab;
+        }
     }
-    
+   
 
     
     /**
@@ -166,5 +176,5 @@ public class ImageGray
         }
         return result;
     }
-    
+
 }
