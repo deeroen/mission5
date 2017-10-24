@@ -60,11 +60,7 @@ public class ImageGray
 
     public static int[][] brighten(int[][] args)
     {       
-        if(args==null){
-            System.out.println("du pate sur brighten");
-            return null; 
-        }
-        else{
+        
             int[][] tab= new int [args.length][args[0].length];
             for (int i=0;i<args.length;i++){
                 for (int z=0;z<args[0].length;z++){
@@ -76,7 +72,7 @@ public class ImageGray
 
             return tab;
         }
-    }
+    
 
     /**
      * @pre img1!=null, img2!=null threshold>=0
